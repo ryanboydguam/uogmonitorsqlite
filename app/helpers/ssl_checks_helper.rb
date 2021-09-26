@@ -1,0 +1,2 @@
+module SslChecksHelper
+end

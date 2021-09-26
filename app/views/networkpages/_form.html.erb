@@ -1,0 +1,47 @@
+<%= form_with(model: networkpage) do |form| %>
+  <% if networkpage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(networkpage.errors.count, "error") %> prohibited this networkpage from being saved:</h2>
+
+      <ul>
+        <% networkpage.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :addressindex %>
+    <%= form.number_field :addressindex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :monitor %>
+    <%= form.number_field :monitor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :relaytime %>
+    <%= form.text_field :relaytime %>
+  </div>
+
+  <div class="field">
+    <%= form.label :creation %>
+    <%= form.datetime_select :creation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

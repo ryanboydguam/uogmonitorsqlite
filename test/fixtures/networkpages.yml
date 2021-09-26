@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address: MyString
+  addressindex: 1
+  monitor: 1
+  status: MyString
+  relaytime: 1.5
+  creation: 2021-09-24 14:08:21
+
+two:
+  address: MyString
+  addressindex: 1
+  monitor: 1
+  status: MyString
+  relaytime: 1.5
+  creation: 2021-09-24 14:08:21

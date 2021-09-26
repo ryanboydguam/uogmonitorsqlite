@@ -1,0 +1,2 @@
+class Networkpage < ApplicationRecord
+end

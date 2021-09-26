@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Addressindex:</strong>
+  <%= @ssl_check.addressindex %>
+</p>
+
+<p>
+  <strong>Monitor:</strong>
+  <%= @ssl_check.monitor %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @ssl_check.status %>
+</p>
+
+<p>
+  <strong>Creation:</strong>
+  <%= @ssl_check.creation %>
+</p>
+
+<%= link_to 'Edit', edit_ssl_check_path(@ssl_check) %> |
+<%= link_to 'Back', ssl_checks_path %>

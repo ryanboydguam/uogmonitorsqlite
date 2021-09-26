@@ -1,0 +1,37 @@
+<%= form_with(model: ssl_check) do |form| %>
+  <% if ssl_check.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ssl_check.errors.count, "error") %> prohibited this ssl_check from being saved:</h2>
+
+      <ul>
+        <% ssl_check.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :addressindex %>
+    <%= form.number_field :addressindex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :monitor %>
+    <%= form.number_field :monitor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :creation %>
+    <%= form.datetime_select :creation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

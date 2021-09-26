@@ -1,0 +1,2 @@
+module NetworkpagesHelper
+end

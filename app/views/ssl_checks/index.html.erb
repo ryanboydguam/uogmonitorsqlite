@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ssl Checks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Addressindex</th>
+      <th>Monitor</th>
+      <th>Status</th>
+      <th>Creation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ssl_checks.each do |ssl_check| %>
+      <tr>
+        <td><%= ssl_check.addressindex %></td>
+        <td><%= ssl_check.monitor %></td>
+        <td><%= ssl_check.status %></td>
+        <td><%= ssl_check.creation %></td>
+        <td><%= link_to 'Show', ssl_check %></td>
+        <td><%= link_to 'Edit', edit_ssl_check_path(ssl_check) %></td>
+        <td><%= link_to 'Destroy', ssl_check, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ssl Check', new_ssl_check_path %>

@@ -1,0 +1,2 @@
+class SslCheck < ApplicationRecord
+end

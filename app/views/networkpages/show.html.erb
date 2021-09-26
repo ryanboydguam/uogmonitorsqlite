@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @networkpage.address %>
+</p>
+
+<p>
+  <strong>Addressindex:</strong>
+  <%= @networkpage.addressindex %>
+</p>
+
+<p>
+  <strong>Monitor:</strong>
+  <%= @networkpage.monitor %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @networkpage.status %>
+</p>
+
+<p>
+  <strong>Relaytime:</strong>
+  <%= @networkpage.relaytime %>
+</p>
+
+<p>
+  <strong>Creation:</strong>
+  <%= @networkpage.creation %>
+</p>
+
+<%= link_to 'Edit', edit_networkpage_path(@networkpage) %> |
+<%= link_to 'Back', networkpages_path %>

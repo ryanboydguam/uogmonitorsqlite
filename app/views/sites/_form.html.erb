@@ -1,0 +1,48 @@
+<%= form_with(model: site) do |form| %>
+  <% if site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+      <ul>
+        <% site.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :address %>
+    <p>Address or Ip address</p>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user %>
+    <p>Name of person that is adding the site</p>
+    <%= form.text_field :user %>
+  </div>
+
+  <div class="field">
+    <%= form.label :creation %>
+    <%= form.datetime_select :creation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delay %>
+    <p>Delay in seconds for wait response</p>
+    <p>Default is 5</p>
+    <%= form.number_field :delay %>
+  </div>
+
+  <div class="field">
+    <%= form.label :maintenance %>
+    <p>(0 Means not under maintenace)(1 Means under maintenace)</p>
+
+    <%= form.number_field :maintenance %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
