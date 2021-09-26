@@ -15,10 +15,11 @@ require 'net/ping'
           end
           tmpNetworkpage.address = x.address
           tmpNetworkpage.addressindex = x.id
-          tmpNetworkpage.monitor = 1
+          tmpNetworkpage.monitor = 2
           tmpNetworkpage.relaytime = checkFloat
           tmpNetworkpage.creation = Time.now
           tmpNetworkpage.save
+          p tmpNetworkpage
         end
       end
     end
