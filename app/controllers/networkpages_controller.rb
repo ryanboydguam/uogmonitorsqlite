@@ -3,7 +3,7 @@ class NetworkpagesController < ApplicationController
 
   # GET /networkpages or /networkpages.json
   def index
-
+    
     @networkpages = Networkpage.all
   end
 
