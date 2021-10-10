@@ -1,9 +1,9 @@
 import consumer from "./consumer";
 //Gets information from the consumer channel
 
-consumer.subscriptions.create("NetworkpagesChannel", {
+consumer.subscriptions.create("SitesChannel", {
   collection() {
-    return document.querySelector("[network-pipe='servers']");
+    return document.querySelector("[data-channel='sites']");
   },
 
   connected() {
@@ -23,8 +23,9 @@ consumer.subscriptions.create("NetworkpagesChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     console.log(data, "FOOO");
-    this.collection().querySelector(`[network-pipe='${data.id}']`)
-      .outerHTML = data.server;
+    //this.collection().querySelector(`[network-pipe='${data.id}']`)
+    //  .outerHTML = data.server;
+    
   },
 
   followServers() {
@@ -37,7 +38,7 @@ consumer.subscriptions.create("NetworkpagesChannel", {
       console.log(this.collection(), "HEHEH");
 
       servers = Array.from(this.collection().children).map((server) => {
-        return server.dataset["server"];
+        return server.dataset["siteId"];
       });
       if (servers.length > 0) {
         results = [];
@@ -45,7 +46,7 @@ consumer.subscriptions.create("NetworkpagesChannel", {
           console.log("FOLLOWING ID ", serverId);
           results.push(
             this.perform("follow", {
-              server_id: serverId,
+              site_id: serverId,
             })
           );
         });

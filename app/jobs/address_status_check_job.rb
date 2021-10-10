@@ -19,7 +19,9 @@ require 'net/ping'
           tmpNetworkpage.relaytime = checkFloat
           tmpNetworkpage.creation = Time.now
           tmpNetworkpage.save
+          ActionCable.server.broadcast("sites:#{x.id}",{eventnetwork: tmpNetworkpage,siteId: x.id})
           p tmpNetworkpage
+          p "[UPDATE]"
         end
       end
     end

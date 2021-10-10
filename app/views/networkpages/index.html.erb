@@ -69,7 +69,7 @@
   </thead>
   <!--New Data Section -->
 
-<tbody network-pipe="servers">
+<tbody data-channel="sites">
   <%@sites.each do |site|%>
     <%up = 0%>
     <%down = 0%>
@@ -82,11 +82,14 @@
           <%end%>
         <%end%>
       <% end %>
-    <tr>
-    <td><%= site.address %></td>
-    <td><%= up %></td>
-    <td><%= down %></td>
-    </tr>  
+    <!--<tr data-siteid = "<%=site.id%>">look at later-->
+    <%= tag.tr data:{site_id:site.id} do%>
+      
+        <td><%= site.address %></td>
+        <td><%= up %></td>
+        <td><%= down %></td>
+       
+    <%end%>
   <%end%>
 </tbody>
 
