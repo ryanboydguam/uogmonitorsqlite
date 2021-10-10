@@ -5,6 +5,7 @@ class NetworkpagesController < ApplicationController
   def index
     
     @networkpages = Networkpage.all
+    @sites = Site.all
   end
 
   # GET /networkpages/1 or /networkpages/1.json

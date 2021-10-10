@@ -2,13 +2,13 @@
 
 <div class="navContainer">
     <div class="navObject">
-      <a href="">Networkpages</a>
+      <a href=""><%= link_to 'NetworkPages', networkpages_path %></a>
     </div>
     <div class="navObject">
-      <a href="">SITES</a>
+      <a href=""><%= link_to 'Sites', sites_path %></a>
     </div>
     <div class="navObject">
-      <a href="">SSL</a>
+      <a href=""><%= link_to 'SSL', ssl_checks_path %></a>
     </div>
   </div>
   <div class="serverStatus">
@@ -67,7 +67,36 @@
       <th colspan="3"></th>
     </tr>
   </thead>
+  <!--New Data Section -->
 
+<tbody network-pipe="servers">
+  <%@sites.each do |site|%>
+    <%up = 0%>
+    <%down = 0%>
+      <% @networkpages.each do |networkpage| %>
+        <%if networkpage.address == site.address%>
+          <%if networkpage.status == "Online"%>
+            <%up += 1%>
+            <%else%>
+            <%down += 1%>
+          <%end%>
+        <%end%>
+      <% end %>
+    <tr>
+    <td><%= site.address %></td>
+    <td><%= up %></td>
+    <td><%= down %></td>
+    </tr>  
+  <%end%>
+</tbody>
+
+
+
+
+
+
+
+<!-- Remove this to get original data back
   <tbody>
     <% @networkpages.each do |networkpage| %>
       <tr>
@@ -83,6 +112,7 @@
       </tr>
     <% end %>
   </tbody>
+  -->
 </table>
 
 <br>
