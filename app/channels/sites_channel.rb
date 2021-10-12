@@ -1,6 +1,6 @@
 class SitesChannel < ApplicationCable::Channel
     def follow(data)
-       stream_from "sites:#{data[:site_id]}"
+       stream_from "sites:#{data["site_id"]}"
     end
   
     def unfollow

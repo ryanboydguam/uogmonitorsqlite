@@ -25,6 +25,10 @@ consumer.subscriptions.create("SitesChannel", {
     console.log(data, "FOOO");
     //this.collection().querySelector(`[network-pipe='${data.id}']`)
     //  .outerHTML = data.server;
+    console.log(data,data)
+    this.collection().querySelector(`[data-channel='${data.id}']`)
+    window.location.reload();
+    //.outerHTML = data.server;
     
   },
 
