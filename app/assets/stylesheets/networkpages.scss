@@ -17,20 +17,17 @@
     color:#FFFFFF !important;
   }
   /*server Status blocks*/
-  .serverStatus{
+  .networkStatus{
     display: flex;
     position: relative;
     flex-wrap: wrap;
+    justify-content: center;
   }
-  .serverBlock{
-    flex: 1 0 32%;
+  .networkBlock{
+    flex: 0 0 28%;
     margin: auto;
-    margin-top: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin:5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
     background-color:#edf0f5;
     width: 100%;
     text-align: center;
@@ -39,9 +36,48 @@
    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.04);
    border-radius: 5px;
   }
-  .serverTitle{
+  .networkTitle{
     margin-bottom: 10px;
   }
+  
+  .serverStatus{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .serverBlock{
+    flex: 0 0 28%;
+    margin: auto;
+    margin:5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    background-color:#edf0f5;
+    width: 100%;
+    color:#A3A2C0;
+    border: 1px solid rgba(0,0,0,0.12);
+   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.04);
+   border-radius: 5px;
+   display: flex;
+   justify-content: space-between;
+  
+  }
+  
+ .elementStatus{
+   color: green;
+ }
+ .elementStatusDown{
+  color: #A3A2C0;
+}
+ .elementStatusOff{
+  color: red;
+}
+.link-to-text-color {
+  text-decoration: none !important;
+   color:#A3A2C0 !important; 
+  }
+  
+
+
   .navObject:hover:not(.active) {
     width:100px;
      color: #171C26;

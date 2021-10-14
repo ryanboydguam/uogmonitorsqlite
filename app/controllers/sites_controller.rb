@@ -8,6 +8,8 @@ class SitesController < ApplicationController
 
   # GET /sites/1 or /sites/1.json
   def show
+    @networkpages = Networkpage.all
+    @sites = Site.all
   end
 
   # GET /sites/new

@@ -1,29 +1,109 @@
 <p id="notice"><%= notice %></p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+<div class="navContainer">
+  <div class="navObject">
+    <a href=""><%= link_to 'NetworkPages', networkpages_path %></a>
+  </div>
+  <div class="navObject">
+    <a href=""><%= link_to 'Sites', sites_path %></a>
+  </div>
+  <div class="navObject">
+    <a href=""><%= link_to 'SSL', ssl_checks_path %></a>
+  </div>
+</div>
+<%siteStatus = ""%>
+<div cla<div class="cardContainer">
+	<div class="cardBlock">
+		<div class="cardTitle"><%= @site.address %></div>
+      <div class="cardContent">
+        <table id="my-chart" class="charts-css area  show-labels show-primary-axis ">
+          <thead>
+            <tr>
+              <th scope="col"> Hour </th>
+            </tr>
+          </thead>
+          <tbody>
+          <%clockTicker = Time.now.to_i%>
+          <%twelveHoursAgo = clockTicker - 43200%>
+          <%lastFloatTime = 0.0%>
+          <%everyTenCalculation = 0.0%>
+          <%everyTenCounter = 0%>
 
-<p>
-  <strong>Address:</strong>
-  <%= @site.address %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @site.user %>
-</p>
+          <%lastMaxFloat =0.0%>
+          <%lastMinFloat=0.0%>
+          <%maxFloat =0.0%>
+          <%minFloat=1.0%>
+          
+            <% @networkpages.each do |networkpage| %>
+              <%if @site.address.match(networkpage.address)%>
+                  <%if networkpage.creation.to_i > twelveHoursAgo%>
+                  
+                    <%everyTenCalculation += networkpage.relaytime%>
+                      <%if networkpage.relaytime > lastMaxFloat%>
+                        <%lastMaxFloat = networkpage.relaytime %>
+                      <%end%>
+                      <%if networkpage.relaytime < lastMinFloat%>
+                        <%lastMinFloat = networkpage.relaytime %>
+                      <%end%>
+                    <%everyTenCounter+= 1%>
+                    <%if everyTenCounter == 9%>
+                      <%everyTenCalculation /=10%>
+                      <%everyTenCalculation /=2%>
+                      <%everyTenCalculation = everyTenCalculation.floor(1)%>
+                      <%if networkpage.creation.to_i > (twelveHoursAgo + 3600)%>
+                        <!--Send new row -->
+                        <tr><th scope="row"> <%=networkpage.creation.hour%> </th>
+                        <%twelveHoursAgo += 3600%>
+                      <%else%>
+                      <tr><th scope="row"></th>
+                      <%end%>
+                      <%lastMaxFloat /= 10%>
+                      <td style="--start: <%="#{lastFloatTime.floor(1)}"%>; --size: <%="#{everyTenCalculation.floor(1)}"%>"></td>
+                      <td style="--start: <%="#{maxFloat.floor(1)}"%>; --size: <%="#{lastMaxFloat.floor(1)}"%> "></td>
+                      <td style="--start: <%="#{minFloat.floor(1)}"%>; --size: <%="#{lastMinFloat.floor(1)}"%>"></td>
+                      
+                      </tr>
+                      <%minFloat = lastMinFloat%>
+                      <%maxFloat = lastMaxFloat%>
+                      <%lastFloatTime = everyTenCalculation%>
+                      <%everyTenCalculation = 0.0%>
+                      <%everyTenCounter = 0%>
+                      <%lastMaxFloat =0.0%>
+                      <%lastMinFloat=1.0%>
+                    <%end%>
 
-<p>
-  <strong>Creation:</strong>
-  <%= @site.creation %>
-</p>
+                  <%end%>
+                  <%siteStatus = networkpage.status%>
+                <%end%>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+		<div class="cardTitle">Status: <%=siteStatus%></div>
+	</div>
+</div>
+</body>
 
-<p>
-  <strong>Delay:</strong>
-  <%= @site.delay %>
-</p>
+<div class="showContainer">
+  <div class="showBlockLeft">
+    <div class="showParentElement showElementLeft">Address: </div>
+    <div class="showChildElement showElementLeft">User: </div>
+    <div class="showChildElement showElementLeft">Creation: </div>
+    <div class="showChildElement showElementLeft">Delay: </div>
+    <div class="showChildElement showElementLeft">Maintenance: </div>
+    <div class="showChildElement showElementLeft"><%= link_to 'Edit Site', edit_site_path(@site) %>:</div>
+    <div class="showChildElement showElementLeft"><%= link_to 'Back To Sites', sites_path %>:</div>
+  </div>
+  <div class="showBlockRight">
+    <div class="showParentElementRight showElementRight"><%= @site.address %></div>
+    <div class="showChildElement showElementRight"><%= @site.user %></div>
+    <div class="showChildElement showElementRight"><%= @site.creation %></div>
+    <div class="showChildElement showElementRight"><%= @site.delay %></div>
+    <div class="showChildElement showElementRight"><%= @site.maintenance %></div>
+    <div class="showChildElement showElementRight"></div>
+    <div class="showChildElement showElementRight"></div>
+  </div>
+</div>
 
-<p>
-  <strong>Maintenance:</strong>
-  <%= @site.maintenance %>
-</p>
 
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>

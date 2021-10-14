@@ -1,124 +1,128 @@
 <p id="notice"><%= notice %></p>
-
+<!--Navagation Section-->
 <div class="navContainer">
-    <div class="navObject">
-      <a href=""><%= link_to 'NetworkPages', networkpages_path %></a>
-    </div>
-    <div class="navObject">
-      <a href=""><%= link_to 'Sites', sites_path %></a>
-    </div>
-    <div class="navObject">
-      <a href=""><%= link_to 'SSL', ssl_checks_path %></a>
-    </div>
+  <div class="navObject">
+    <a href=""><%= link_to 'NetworkPages', networkpages_path %></a>
   </div>
-  <div class="serverStatus">
+  <div class="navObject">
+    <a href=""><%= link_to 'Sites', sites_path %></a>
+  </div>
+  <div class="navObject">
+    <a href=""><%= link_to 'SSL', ssl_checks_path %></a>
+  </div>
+</div>
+<!--Network Status-->
+<div class="networkStatus">
+  <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Servers Online</span>
+      </div>
+      <div class="networkNumber">
+        <span><%=Time.now%></span>
+      </div>
+  </div>
+  <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Servers Offline</span>
+      </div>
+      <div class="networkNumber">
+        <span>0</span>
+      </div>
+  </div>
+  <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Server Maintenance</span>
+      </div>
+      <div class="networkNumber">
+        <span>0</span>
+      </div>
+  </div>
+</div>
+  
+<!--Seperates servers baised on Status -->
+<%onlineArray = []%>
+<%offlineArray = []%>
+<%maintenanceArray = []%>
+<%@sites.each do |site|%>
+  <%if site.maintenance== false%>
+  <%maintenanceArray.push(site.address)%>
+  <%else%>
+    <%siteStatus=""%>
+    <% @networkpages.each do |networkpage| %>
+      <%if networkpage.address.match(site.address) {siteStatus = networkpage.status}%>
+      <%end%>
+    <%end%>
+    <%if siteStatus.match("Online")%>
+      <%onlineArray.push(site.address)%>
+      <%else%>
+      <%offlineArray.push(site.address)%>
+    <%end%>
+  <%end%>
+<%end%>
+<!--CODE GENERATOR FOR WEBSITE-->
+<div class="serverStatus">
+<%while onlineArray.length > 0 || offlineArray.length > 0 || maintenanceArray.length > 0%>
+  <!--Online Servers-->
+  <%if onlineArray.length > 0 %>
     <div class="serverBlock">
-        <div class="serverTitle">
-          <span>Servers Online</span>
-        </div>
-        <div class="serverNumber">
-        
-          <span>0</span>
-        </div>
+    <%siteUrl = onlineArray.pop()%>
+    <%@sites.each do |site|%>
+      <%if site.address.match(siteUrl)%>
+        <span class ="elementName"><%= link_to "#{siteUrl}", site ,class: 'link-to-text-color'%></span>
+      <%end%>
+    <%end%>
+    <span class="elementStatus">Online</span>
     </div>
-    <div class="serverBlock">
-        <div class="serverTitle">
-          <span>Servers Offline</span>
-        </div>
-        <div class="serverNumber">
-          <span>0</span>
-        </div>
-    </div>
-    <div class="serverBlock">
-        <div class="serverTitle">
-          <span>Server Maintenance</span>
-        </div>
-        <div class="serverNumber">
-          <span>0</span>
-        </div>
-    </div>
-    <div class="serverBlock">
-        <div class="serverTitle">
-          <span>Server Maintenance</span>
-        </div>
-        <div class="serverNumber">
-          <span>0</span>
-        </div>
-    </div>
-    <div class="serverBlock">
-        <div class="serverTitle">
-          <span>Server Maintenance</span>
-        </div>
-        <div class="serverNumber">
-          <span>0</span>
-        </div>
-    </div>
+  <%else%>
+    <div class="serverBlock"></div>
+  <%end%>
 
+  <!--Offline Servers-->
+  <%if offlineArray.length > 0 %>
+  <div class="serverBlock">
+  <%siteUrl = offlineArray.pop()%>
+  <%@sites.each do |site|%>
+      <%if site.address.match(siteUrl)%>
+        <span class ="elementName"><%= link_to "#{siteUrl}", site ,class: 'link-to-text-color'%></span>
+      <%end%>
+    <%end%>
+    <span class="elementStatusOff">Offline</span>
+    </div>
+  <%else%>
+    <div class="serverBlock"></div>
+  <%end%>
+
+    <!--Matinance Servers-->
+  <%if maintenanceArray.length > 0 %>
+  <div class="serverBlock">
+  <%siteUrl = maintenanceArray.pop()%>
+  <%@sites.each do |site|%>
+      <%if site.address.match(siteUrl)%>
+        <span class ="elementName"><%= link_to "#{siteUrl}", site ,class: 'link-to-text-color'%></span>
+      <%end%>
+    <%end%>
+  <span class="elementStatusDown">Down</span>
   </div>
+  <%else%>
+    <div class="serverBlock"></div>
+  <%end%>
+<%end%>
+</div>
+<!--New Section -->
+
+
+
 
 <table>
-  <thead>
-    <tr>
-      <th>Address</th>
-      <th>Addressindex</th>
-      <th>Monitor</th>
-      <th>Status</th>
-      <th>Relaytime</th>
-      <th>Creation</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <!--New Data Section -->
-
 <tbody data-channel="sites">
   <%@sites.each do |site|%>
-    <%up = 0%>
-    <%down = 0%>
-      <% @networkpages.each do |networkpage| %>
-        <%if networkpage.address == site.address%>
-          <%if networkpage.status == "Online"%>
-            <%up += 1%>
-            <%else%>
-            <%down += 1%>
-          <%end%>
-        <%end%>
-      <% end %>
-    <!--<tr data-siteid = "<%=site.id%>">look at later-->
     <%= tag.tr data:{site_id:site.id} do%>
-      
-        <td><%= site.address %></td>
-        <td><%= up %></td>
-        <td><%= down %></td>
-       
     <%end%>
   <%end%>
 </tbody>
-
-
-
-
-
-
-
-<!-- Remove this to get original data back
-  <tbody>
-    <% @networkpages.each do |networkpage| %>
-      <tr>
-        <td><%= networkpage.address %></td>
-        <td><%= networkpage.addressindex %></td>
-        <td><%= networkpage.monitor %></td>
-        <td><%= networkpage.status %></td>
-        <td><%= networkpage.relaytime %></td>
-        <td><%= networkpage.creation %></td>
-        <td><%= link_to 'Show', networkpage %></td>
-        <td><%= link_to 'Edit', edit_networkpage_path(networkpage) %></td>
-        <td><%= link_to 'Destroy', networkpage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  -->
 </table>
 
 <br>
-
+<!--
 <%= link_to 'New Networkpage', new_networkpage_path %>
+-->
