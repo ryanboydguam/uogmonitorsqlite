@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
 <!--Navagation Section-->
 <div class="navContainer">
   <div class="navObject">
@@ -11,11 +12,75 @@
     <a href=""><%= link_to 'SSL', ssl_checks_path %></a>
   </div>
 </div>
+<!-- END Navagation Section-->
+<!--Graph Monitor Section -->
+<%clockTicker = Time.now.to_i%>
+<%clockTicker -= 3600%>
+
+
+<%graphData = Array.new(@sites.length){Array.new(0)}%>
+<%sitecounter = 0%>
+
+<%@sites.each do |site|%>
+<%tempcounter=0%>
+<!-- Checks to see if the site is under maintenance-->
+  <%if site.maintenance== false%>
+  <%else%>
+    <% @networkpages.each do |networkpage| %>
+      <%if networkpage.creation.to_i > clockTicker%>
+        <%if site.address == networkpage.address%>
+          <%graphData[sitecounter].push(networkpage.relaytime)%>
+          <%tempcounter+=1%>
+        <%end%>
+      <%end%>
+    <%end%>
+     <%sitecounter += 1%>
+  <%end%>
+<%end%>
+<div class="cardContainerNetwork">
+	<div class="cardBlockNetwork">
+		<div class="cardTitleNetwork">Websites</div>
+      <div class="cardContentNetwork">
+        <table id="networkPages-chart" class="charts-css area show-labels show-primary-axis ">
+          <thead>
+            <tr>
+              <th scope="col"> Hour </th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">Hour </th>
+                <td style="--start: 0.0; --size: 0.0"></td>
+          </tr>
+          <%loopGuard = 60%>
+          <%oldFloatdata = Array.new(@sites.length,0.0)%>
+          <%while loopGuard > 1%>
+          <tr><th scope="row"></th>
+            <%graphData.each_with_index do |data,index|%>
+            <%dataLoader = data.pop().to_f%>
+            <%dataLoader /= 5%>
+            <%sitelink = @sites.all%>
+            
+            <td style="--start: <%="#{oldFloatdata.shift}"%>; --size: <%="#{dataLoader}"%> "></td>
+            
+           
+            <%oldFloatdata.push(dataLoader)%>
+            <%end%>
+            </tr>
+            <%loopGuard-=1%>
+          <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Graph Monitor Section -->
 <!--Network Status-->
 <div class="networkStatus">
   <div class="networkBlock">
       <div class="networkTitle">
-        <span>Servers Online</span>
+        <span>Websites Status</span>
       </div>
       <div class="networkNumber">
         <span><%=Time.now%></span>
@@ -23,7 +88,7 @@
   </div>
   <div class="networkBlock">
       <div class="networkTitle">
-        <span>Servers Offline</span>
+        <span>Websites Errors</span>
       </div>
       <div class="networkNumber">
         <span>0</span>
@@ -31,14 +96,14 @@
   </div>
   <div class="networkBlock">
       <div class="networkTitle">
-        <span>Server Maintenance</span>
+        <span>Maintenance</span>
       </div>
       <div class="networkNumber">
         <span>0</span>
       </div>
   </div>
 </div>
-  
+  <!--END Network Status-->
 <!--Seperates servers baised on Status -->
 <%onlineArray = []%>
 <%offlineArray = []%>
@@ -59,7 +124,7 @@
     <%end%>
   <%end%>
 <%end%>
-<!--CODE GENERATOR FOR WEBSITE-->
+<!--CODE GENERATOR FOR WEBSITE STATUS-->
 <div class="serverStatus">
 <%while onlineArray.length > 0 || offlineArray.length > 0 || maintenanceArray.length > 0%>
   <!--Online Servers-->
@@ -108,21 +173,54 @@
   <%end%>
 <%end%>
 </div>
-<!--New Section -->
+<!--END CODE GENERATOR FOR WEBSITE STATUS-->
+
+
+
+
+
+
 
 
 
 
 <table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Addressindex</th>
+      <th>Monitor</th>
+      <th>Status</th>
+      <th>Relaytime</th>
+      <th>Creation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <!--New Data Section -->
+
 <tbody data-channel="sites">
   <%@sites.each do |site|%>
+    <%up = 0%>
+    <%down = 0%>
+      <% @networkpages.each do |networkpage| %>
+        <%if networkpage.address == site.address%>
+          <%if networkpage.status == "Online"%>
+            <%up += 1%>
+            <%else%>
+            <%down += 1%>
+          <%end%>
+        <%end%>
+      <% end %>
+    <!--<tr data-siteid = "<%=site.id%>">look at later-->
     <%= tag.tr data:{site_id:site.id} do%>
+      
+        <td><%= site.address %></td>
+        <td><%= up %></td>
+        <td><%= down %></td>
+       
     <%end%>
   <%end%>
 </tbody>
-</table>
 
-<br>
-<!--
-<%= link_to 'New Networkpage', new_networkpage_path %>
--->
+
+

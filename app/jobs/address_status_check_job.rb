@@ -8,7 +8,7 @@ require 'net/ping'
         if x.maintenance?
           checkFloat = upURL(x.address,x.delay)
           tmpNetworkpage = Networkpage.new#creates a new networkpage object
-          if checkFloat == 0
+          if checkFloat == 5.0
             tmpNetworkpage.status = "Offline"
           else
             tmpNetworkpage.status = "Online"
@@ -30,7 +30,7 @@ require 'net/ping'
       if check.ping
         return check.duration.round(4)
       else
-        return 0
+        return 5.0
       end
     end
 end
