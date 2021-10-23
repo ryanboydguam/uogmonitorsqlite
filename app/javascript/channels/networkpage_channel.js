@@ -3,7 +3,7 @@ import consumer from "./consumer";
 
 consumer.subscriptions.create("SitesChannel", {
   collection() {
-    return document.querySelector("[data-channel='sites']");
+    return document.querySelectorAll("[data-channel='sites'] .siteElement");
   },
 
   connected() {
@@ -26,10 +26,25 @@ consumer.subscriptions.create("SitesChannel", {
     //this.collection().querySelector(`[network-pipe='${data.id}']`)
     //  .outerHTML = data.server;
     console.log(data,data)
-    this.collection().querySelector(`[data-channel='${data.id}']`)
-    window.location.reload();
+    //this.collection().querySelector(`[data-channel='${data.id}']`)
+    //window.location.reload();
     //.outerHTML = data.server;
-    
+    //Removes the old site data points
+    var oldElement = document.querySelector(`[data-site-id='${data.siteId}']`)
+    oldElement.remove(`data-site-id='${data.siteId}'`)
+    oldElement.remove(`data-site-id='${data.siteId}'`)
+
+    //removes the old graph
+    //var oldElement2 = document.querySelector(`[data-graph-id='${1}']`)
+    //oldElement2.remove(`data-graph-id='${1}'`)
+
+    //Inserts the new site data points
+    if (data.status == "Online"){
+      document.querySelector(".onlineWebsiteSection").insertAdjacentHTML("beforeend",data.htmlRender)
+    }else{
+      document.querySelector(".offlineWebsiteSection").insertAdjacentHTML("beforeend",data.htmlRender)
+    }
+    //Inserts the new site data graph
   },
 
   followServers() {
@@ -41,7 +56,7 @@ consumer.subscriptions.create("SitesChannel", {
     } else {
       console.log(this.collection(), "HEHEH");
 
-      servers = Array.from(this.collection().children).map((server) => {
+      servers = Array.from(this.collection()).map((server) => {
         return server.dataset["siteId"];
       });
       if (servers.length > 0) {

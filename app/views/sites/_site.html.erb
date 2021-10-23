@@ -1,0 +1,10 @@
+<%=tag.div data:{site_id:site.id}, class: 'siteElement' do%>
+    
+    <%if site.maintenance? %>
+    <%=site.address%>
+        <%=site.networkpages.last.status %>
+    <%else%>
+    <%=site.address%>
+    <%="Maintenance" %>
+    <%end%>
+<%end%>

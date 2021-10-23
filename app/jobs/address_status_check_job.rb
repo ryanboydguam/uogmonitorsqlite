@@ -18,8 +18,13 @@ require 'net/ping'
           tmpNetworkpage.monitor = 2
           tmpNetworkpage.relaytime = checkFloat
           tmpNetworkpage.creation = Time.now
+          tmpNetworkpage.site = x
           tmpNetworkpage.save
-          ActionCable.server.broadcast("sites:#{x.id}",{eventnetwork: tmpNetworkpage,siteId: x.id})
+          ActionCable.server.broadcast("sites:#{x.id}",{siteId: x.id,htmlRender: SitesController.render(
+            partial: 'sites/site', locals: { site: x }
+          ),pingStatus: tmpNetworkpage.status
+          
+          })
           p tmpNetworkpage
           p "[UPDATE]"
         end

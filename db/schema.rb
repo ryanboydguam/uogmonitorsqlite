@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_26_092115) do
+ActiveRecord::Schema.define(version: 2021_10_16_094237) do
 
   create_table "networkpages", force: :cascade do |t|
     t.string "address"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_09_26_092115) do
     t.datetime "creation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "site_id"
+    t.index ["site_id"], name: "index_networkpages_on_site_id"
   end
 
   create_table "sites", force: :cascade do |t|
