@@ -32,7 +32,6 @@ consumer.subscriptions.create("SitesChannel", {
     //Removes the old site data points
     var oldElement = document.querySelector(`[data-site-id='${data.siteId}']`)
     oldElement.remove(`data-site-id='${data.siteId}'`)
-    oldElement.remove(`data-site-id='${data.siteId}'`)
 
     //removes the old graph
     //var oldElement2 = document.querySelector(`[data-graph-id='${1}']`)
@@ -40,9 +39,9 @@ consumer.subscriptions.create("SitesChannel", {
 
     //Inserts the new site data points
     if (data.status == "Online"){
-      document.querySelector(".onlineWebsiteSection").insertAdjacentHTML("beforeend",data.htmlRender)
+      document.querySelector(".serverStatus").insertAdjacentHTML("beforeend",data.htmlRender)
     }else{
-      document.querySelector(".offlineWebsiteSection").insertAdjacentHTML("beforeend",data.htmlRender)
+      document.querySelector(".serverStatus").insertAdjacentHTML("beforeend",data.htmlRender)
     }
     //Inserts the new site data graph
   },

@@ -1,10 +1,10 @@
-<%=tag.div data:{site_id:site.id}, class: 'siteElement' do%>
-    
+<%=tag.div data:{site_id:site.id}, class: 'siteElement serverBlock' do%>
+  
     <%if site.maintenance? %>
-    <%=site.address%>
-        <%=site.networkpages.last.status %>
+    <span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
+      <span class="elementStatus"><%=site.networkpages.last.status %></span>
     <%else%>
-    <%=site.address%>
-    <%="Maintenance" %>
+      <span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
+      <span class="elementStatus"><%="Maintenance" %></span>
     <%end%>
 <%end%>
