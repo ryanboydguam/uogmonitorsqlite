@@ -32,7 +32,7 @@ consumer.subscriptions.create("SitesChannel", {
     //Removes the old site data points
     var oldElement = document.querySelector(`[data-site-id='${data.siteId}']`)
     oldElement.remove(`data-site-id='${data.siteId}'`)
-
+   
     //removes the old graph
     //var oldElement2 = document.querySelector(`[data-graph-id='${1}']`)
     //oldElement2.remove(`data-graph-id='${1}'`)

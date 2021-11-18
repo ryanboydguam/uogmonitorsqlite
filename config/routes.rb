@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get 'ssl', to:'ssl_checks#index'
   get 'sites', to:'sites#index'
   
+  
 end

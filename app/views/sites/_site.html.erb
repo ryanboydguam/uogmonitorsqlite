@@ -1,4 +1,4 @@
-<%=tag.div data:{site_id:site.id}, class: 'siteElement serverBlock' do%>
+<%=tag.div data:{site_id:site.id}, class: 'siteElement serverBlock onlineColor' do%>
   
     <%if site.maintenance? %>
     <span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>

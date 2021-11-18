@@ -13,8 +13,9 @@
   </div>
 </div>
 <!-- END Navagation Section-->
+<h1>UP TIME:BRUH IM LIKE NOT HAVING A GOOD TIME I GUESS LIKE 90%</h1>
 <!-- Render Graph Data -->
-<div data-channel="graph">
+<div class="websiteGraph">
   <section class="networkIndexGraph">
     <%=render partial: "site_graph" %>
   </section>
@@ -50,80 +51,14 @@
 <!--END Network Status-->
 <div data-channel="sites">
   <div class="serverStatus">
-    
-      <%@sites.offline.each do |site|%>
-        <%=render partial: site %>
-      <%end%>
-    
-    <!--
-      <%@sites.online.each do |site|%>
-        <%=render partial: site %>
-      <%end%>
-    
-    
-      <%@sites.maintenance.each do |site|%>
-        <%=render partial: site %>
-      <%end%>
-    -->
+    <%@sites.offline.each do |site|%>
+      <%=render partial: site%>
+    <%end%>
+    <%@sites.online.each do |site|%>
+      <%=render partial: site %>
+    <%end%>
+    <%@sites.maintenance.each do |site|%>
+      <%=render partial: site%>
+    <%end%>
   </div>
 </div>
-<!-- old code -->
-<!--Seperates servers baised on Status 
-<%onlineArray = []%>
-<%offlineArray = []%>
-<%maintenanceArray = []%>
-<%@sites.each do |site|%>
-  <%if site.maintenance== false%>
-    <%maintenanceArray.push(site.address)%>
-  <%else%>
-    <%siteStatus=""%>
-    <% @networkpages.each do |networkpage| %>
-      <%if networkpage.address.match(site.address) {siteStatus = networkpage.status}%>
-      <%end%>
-    <%end%>
-    <%if siteStatus.match("Online")%>
-      <%onlineArray.push(site.address)%>
-    <%else%>
-      <%offlineArray.push(site.address)%>
-    <%end%>
-  <%end%>
-<%end%>
-CODE GENERATOR FOR WEBSITE STATUS
-<div class="serverStatus">
-  <%while onlineArray.length > 0 || offlineArray.length > 0 || maintenanceArray.length > 0%>
-    <%while offlineArray.length > 0 %>
-      <%siteUrl = offlineArray.pop()%>
-      <%@sites.each do |site|%>
-        <%if site.address.match(siteUrl)%>
-          <div class="serverBlock">
-            <span class ="elementName"><%= link_to "#{siteUrl}", site ,class: 'link-to-text-color'%></span>
-            <span class="textColorRed">Offline</span>
-          </div>
-        <%end%>
-      <%end%>
-    <%end%>
-    <%while onlineArray.length > 0 %>
-        <%siteUrl = onlineArray.pop()%>
-        <%@sites.each do |site|%>
-          <%if site.address.match(siteUrl)%>
-            <div class="serverBlock">
-              <span class ="elementName"><%= link_to "#{siteUrl}", site ,class: 'link-to-text-color'%></span>
-              <span class="textColorGreen">Online</span>
-            </div>
-          <%end%>
-        <%end%>
-    <%end%>
-    <%while maintenanceArray.length > 0 %>
-        <%siteUrl = maintenanceArray.pop()%>
-        <%@sites.each do |site|%>
-          <%if site.address.match(siteUrl)%>
-          <div class="serverBlock">
-            <span class ="elementName"><%= link_to "#{siteUrl}", site ,class: 'link-to-text-color'%></span>
-            <span class="textColorPurple">Down</span>
-          </div>
-          <%end%>
-        <%end%>
-    <%end%>
-   
-  <%end%>
-</div>-->
