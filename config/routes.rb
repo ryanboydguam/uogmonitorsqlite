@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :ssl_checks #, only: [:index]
   resources :networkpages#, only: [:index]
   root 'public_html#index'

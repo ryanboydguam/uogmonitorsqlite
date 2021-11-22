@@ -59,3 +59,6 @@ gem 'ipaddress', '0.8.3'
 gem 'net-ping'
 gem 'win32-security', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'whenever', require: false
+
+
+gem "devise", "~> 4.8"
