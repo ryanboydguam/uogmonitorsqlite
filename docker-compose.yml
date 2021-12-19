@@ -6,6 +6,8 @@ services:
     command: start
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpacker
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=postgres
     depends_on:
       - postgres
       - redis
