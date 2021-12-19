@@ -5,7 +5,6 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
   timeout: 5000
 
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
