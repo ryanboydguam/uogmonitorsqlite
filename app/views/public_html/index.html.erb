@@ -1,19 +1,8 @@
 <p id="notice"><%= notice %></p>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
-<!--Navagation Section-->
-<div class="navContainer">
-  <div class="navObject">
-    <%= link_to 'PublicHtml', root_path %>
-  </div>
-  <div class="navObject">
-    <%= link_to 'Sites', sites_path %>
-  </div>
-  <div class="navObject">
-    <%= link_to 'SSL', ssl_checks_path %>
-  </div>
-</div>
+
 <!-- END Navagation Section-->
-<h1>UP TIME:BRUH IM LIKE NOT HAVING A GOOD TIME I GUESS LIKE 90%</h1>
+<h1>Website Uptime</h1>
 <!-- Render Graph Data -->
 <div class="websiteGraph">
   <section class="networkIndexGraph">
@@ -21,6 +10,8 @@
   </section>
 </div>
 <!-- END Render Graph Data -->
+
+
 <!--Network Status-->
 <div class="networkStatus">
   <div class="networkBlock">

@@ -21,10 +21,12 @@
 
 
 body {
-    margin: 0% !important;
-    background-color: #0C0622;
-    font-family: 'RuneScape UF', "regular";
-    color: yellow;
+    margin: 0 !important;
+    margin-top:15px;
+    padding: 0 !important;
+    background-color: #030D16;
+    //font-family: 'RuneScape UF', "regular";
+    color: white;
     // background-image: image-url("bandos_pet.png");
 }
 
@@ -32,17 +34,28 @@ body {
 .navContainer {
     display: flex;
     position: relative;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    background-color: #281737;
-    border-color: #522080;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.46), inset 0 0 1px 0 #000;
-    border-radius: 0px;
+    margin: 0 !important;
+    border-image: 
+    linear-gradient(
+      to bottom, 
+      white, 
+      rgba(0, 0, 0, 0)
+    ) 2 100%;
+    background-color: #0c1c2B;
+    border-width: 3px;
     border-style: solid;
-    border-width: 1px;
+    //border-color: black;
+    
+    //border: 3px solid rgba(0, 0, 0, 0.12);
+    //box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.46), inset 0 0 1px 0 #000;
+    //border-radius: 0px;
+   // border-style: solid;
+    //border-width: 1px;
 }
 
 .navObject {
     padding: 15px;
+    margin-top:0%;
     width: 100px;
     height: 100%;
     display: inline;
@@ -51,7 +64,7 @@ body {
 
 .navObject a {
     text-decoration: none;
-    color: yellow;
+    color: white;
 }
 
 .navObject:hover:not(.active) {
@@ -68,7 +81,7 @@ body {
 
 .link-to-text-color {
     text-decoration: none !important;
-    color: yellow !important;
+    color: #526174 !important;
 }
 
 .offlineWebsiteSection {
@@ -89,4 +102,54 @@ body {
 .myChartDiv {
     max-width: 100%;
     max-height: 400px;
+}
+//<!-- application development area -->
+.serverStatus{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+}
+.serverBlock{
+  margin: 2vw;
+  flex: 0 0 28%;
+  padding: 1vw;
+  //#526174
+  //#ff4858
+ 
+  box-shadow:3px 3px 10px 0px #526174;
+  border-left:3px solid;
+  // border-radius: 5px;
+   border-color:#ff4858;
+  // border-top:1px solid;
+   border-radius: 5px;
+  // border-color: #ff4858;
+ 
+
+  
+  font-size: 1.5vw;
+  
+  //text-shadow: 1px 1px 3px grey;
+  width:25vw;
+  background-color: #0c1c2b;
+}
+.flexcard_element_row div{
+  width:16vw;
+}
+.flexcard_element_row{
+  display: flex;
+  overflow-x: hidden;
+  padding-bottom: 0.5vw;
+}
+.flexcard_element_row div:first-child{
+  margin-right:auto;
+}
+.flexcard_element_row div:last-child{
+  text-align: right;
+}
+.uptime{
+  background:linear-gradient(90deg, rgba(255,183,188,1) 60%, rgba(255,183,188,0) 00%);
+  border: 1px solid;
+  border-color: rgba(255,183,188,1);
+  padding-left: 15px;
 }

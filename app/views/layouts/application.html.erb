@@ -12,7 +12,20 @@
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p>
+  
+  <!--Navagation Section-->
+<div class="navContainer">
+  <div class="navObject">
+    <%= link_to 'PublicHtml', root_path %>
+  </div>
+  <div class="navObject">
+    <%= link_to 'Sites', sites_path %>
+  </div>
+  <div class="navObject">
+    <%= link_to 'SSL', ssl_checks_path %>
+  </div>
+</div>
+<p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
     <%= yield %>
     
