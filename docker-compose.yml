@@ -52,6 +52,8 @@ services:
     command: sh -c "bundle exec whenever --update-crontab && crond -l0 -f -d0"
     environment:
       - RAILS_ENV=development
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=postgres
     depends_on:
       - postgres
       - redis
