@@ -1,28 +1,18 @@
-<%=tag.div data:{site_id:site.id}, class: 'siteElement serverBlock onlineColor flexcard_element' do%>
-  
-    <%if site.maintenance? %>
-    <div class="flexcard_element_row">
-      <div>Site Name</div>
-      <div><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></div>
-    </div>
-    <div class="flexcard_element_row">
-      <div>Status</div>
-      <div><%=site.networkpages.last.status %></div>
-    </div>
-    <div class="flexcard_element_row">
-      <div>Uptime</div>
-      <div>%<%array_status=site.networkpages.pluck(:status) %> 
-      <%array_status_result=array_status.each_with_object(Hash.new(0)){|word,counts| counts[word]+=1}%>
-      <%=(array_status_result["Online"].to_f/(array_status_result["Online"].to_f+array_status_result["Offline"].to_f)*100).to_i%>
+<%=tag.div data:{site_id:site.id}, class: 'address_container siteElement serverBlock onlineColor flexcard_element' do%>
+  <%if site.maintenance? %>
+    <div class="address_element">
+      <div class="flex_grow_site_address"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></div>
+      <div class="address_element_data online_color"><%=site.networkpages.last.status %></div>
+      <div class="address_element_data online_color"><%=Time.now %></div>
+      <div class=""><%array_status=site.networkpages.pluck(:status) %>
+        <%array_status_result=array_status.each_with_object(Hash.new(0)){|word,counts| counts[word]+=1}%>
+        <%=(array_status_result["Online"].to_f/(array_status_result["Online"].to_f+array_status_result["Offline"].to_f)*100).to_i%> %
       </div>
     </div>
-    <div class="">
-      <div>Information</div>
-      </div>
-      <!--<span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
+    <!--<span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
       <span class="elementStatus"><%=site.networkpages.last.status %></span>-->
-    <%else%>
-      <span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
-      <span class="elementStatus"><%="Maintenance" %></span>
-    <%end%>
+  <%else%>
+    <span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
+    <span class="elementStatus"><%="Maintenance" %></span>
+  <%end%>
 <%end%>
