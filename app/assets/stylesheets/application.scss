@@ -104,52 +104,102 @@ body {
     max-height: 400px;
 }
 //<!-- application development area -->
+// .serverStatus{
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+//   flex-wrap: wrap;
+// }
+// .serverBlock{
+//   margin: 10px;
+//   flex-grow: 0;
+//   padding:10px 50px 10px 50px ;
+//   display: flex;
+//   //#526174
+//   //#ff4858
+ 
+//   //box-shadow:3px 3px 10px 0px #526174;
+//   border-left:3px solid;
+//   // border-radius: 5px;
+//    border-color:#ff4858;
+//   // border-top:1px solid;
+//    border-radius: 5px;
+//   // border-color: #ff4858;
+ 
+
+  
+//   font-size: 1.5vw;
+//   width: 100%;
+//   //text-shadow: 1px 1px 3px grey;
+//   background-color: #0c1c2b;
+// }
+// .flexcard_element_row div{
+//   width:16vw;
+//   flex-grow: 1;
+  
+//   padding:0.5vw;
+// }
+// .flexcard_element_row{
+//   display: flex;
+//   overflow-x: hidden;
+  
+//   padding-bottom: 0.5vw;
+// }
+// .flexcard_element_row div:first-child{
+//   margin-right:auto;
+// }
+// .flexcard_element_row div:last-child{
+//   text-align: right;
+// }
+// .uptime{
+//   background:linear-gradient(90deg, rgba(255,183,188,1) 60%, rgba(255,183,188,0) 00%);
+//   border: 1px solid;
+//   border-color: rgba(255,183,188,1);
+//   padding-left: 15px;
+// }
+// .flex_grow_1{
+//   flex-grow: 1;
+// }
+// .flex_grow_2{
+//   flex-grow: 2;
+// }
+// .flex_grow_3{
+//   flex-grow: 3;
+// }
+// .flex_grow_4{
+//   flex-grow: 4;
+// }
 .serverStatus{
   display: flex;
+  flex-direction: column;
   width: 100%;
-  flex-wrap: wrap;
-
 }
-.serverBlock{
-  margin: 2vw;
-  flex: 0 0 28%;
-  padding: 1vw;
-  //#526174
-  //#ff4858
- 
-  box-shadow:3px 3px 10px 0px #526174;
-  border-left:3px solid;
-  // border-radius: 5px;
-   border-color:#ff4858;
-  // border-top:1px solid;
-   border-radius: 5px;
-  // border-color: #ff4858;
- 
-
-  
-  font-size: 1.5vw;
-  
-  //text-shadow: 1px 1px 3px grey;
-  width:25vw;
-  background-color: #0c1c2b;
-}
-.flexcard_element_row div{
-  width:16vw;
-}
-.flexcard_element_row{
+.address_container{
   display: flex;
-  overflow-x: hidden;
-  padding-bottom: 0.5vw;
+  flex-direction: row;
+  width: 100%;
+  font-size: 1vmax;
+  
 }
-.flexcard_element_row div:first-child{
-  margin-right:auto;
+.address_element div{
+
 }
-.flexcard_element_row div:last-child{
-  text-align: right;
-}
-.uptime{
-  background:linear-gradient(90deg, rgba(255,183,188,1) 60%, rgba(255,183,188,0) 00%);
+.address_element{
+  display: flex;
+  flex-grow: 1;
+  text-align: left;
+  background-color: #0c1c2b;
+  margin: 5px;
+  padding: 5px 20px 5px 20px;
   border: 1px solid;
-  border-color: rgba(255,183,188,1);
-  padding-left: 15px;
+  color: #526174;
+}
+.address_element_data{
+  flex-grow: 1;
+}
+.flex_grow_site_address{
+  flex-grow: 2;
+}
+.online_color{
+  color:greenyellow;
 }
