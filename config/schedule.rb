@@ -23,6 +23,6 @@ set :environment, ENV["RAILS_ENV"]
 every 1.minutes do
   runner "AddressStatusCheckJob.perform_now()"
 end
-# every 1.minutes do
-#   runner "DiscordBotJob.perform_now()"
-# end
+every 1.minutes do
+   runner "DiscordBotJob.perform_now()"
+ end
