@@ -203,3 +203,30 @@ body {
 .online_color{
   color:greenyellow;
 }
+.offline_color{
+  color:red; 
+}
+.maintenance_color{
+  color:white; 
+}
+.network_block_full_online{
+  background-color: #0c1c2b;
+  border-color:#526174;
+  border-width: 1px;
+  border-style:solid;
+  color:#526174;
+}
+.network_block_full_offline{
+  background-color: #0c1c2b;
+  border-color:red;
+  border-width: 1px;
+  border-style:solid;
+  color:#526174;
+}
+.network_block_full_maintenance{
+  background-color: #0c1c2b;
+  border-color:white;
+  border-width: 1px;
+  border-style:solid;
+  color:#526174;
+}

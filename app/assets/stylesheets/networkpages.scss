@@ -4,24 +4,30 @@
   position: relative;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 3vmax;
+  margin-top: 5px;
+}
+.network_block_full{
+  background-color: #0c1c2b;
+  width: 100%;
+  text-align: center;
 }
 
 .networkBlock {
-  flex: 0 0 28%;
+  flex: 0 0 19%;
   margin: auto;
-  margin: 5px 5px 5px 5px;
+  //margin: 5px 5px 5px 5px;
   padding: 5px 5px 5px 5px;
-  background-color: #0c1c2b;
-  border:#526174;
-  border:1px solid;
+  //background-color: #0c1c2b;
+  // border:#526174;
+  // border:1px solid;
   width: 100%;
   text-align: center;
-  color:#526174;
+  // color:#526174;
 }
 
 .networkTitle {
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 
