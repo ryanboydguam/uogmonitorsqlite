@@ -1,7 +1,12 @@
 class Site < ApplicationRecord
     has_many :networkpages
     has_one :latest_ping,->{networkpages.last}, class_name: "Networkpage"
-    scope :offline,->{ joins(:networkpages).where(networkpages:{status: "Offline"}).distinct}
-    scope :online,->{ joins(:networkpages).where(networkpages:{status: "Online"}).distinct}
-    scope :maintenance,->{ where(maintenance: false) }\
+    scope :offline,->{ where(status: "Offline")}
+    scope :online,->{ where(status: "Online")}
+    scope :maintenance,->{ where(maintenance: false) }
+    before_save do |site|#switch for maintances. So if it is false then it will update the status
+        unless site.maintenance?
+            site.status = "Maintenance"
+        end
+    end
 end
