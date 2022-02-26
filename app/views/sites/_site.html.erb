@@ -1,18 +1,55 @@
-<%=tag.div data:{site_id:site.id}, class: 'address_container siteElement serverBlock onlineColor flexcard_element' do%>
-  <%if site.maintenance? %>
-    <div class="address_element">
-      <div class="flex_grow_site_address"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></div>
-      <div class="address_element_data online_color"><%=site.networkpages.last.status %></div>
-      <div class="address_element_data online_color"><%=Time.now %></div>
-      <div class=""><%array_status=site.networkpages.pluck(:status) %>
-        <%array_status_result=array_status.each_with_object(Hash.new(0)){|word,counts| counts[word]+=1}%>
-        <%=(array_status_result["Online"].to_f/(array_status_result["Online"].to_f+array_status_result["Offline"].to_f)*100).to_i%> %
+<%array_status=site.networkpages.last(60).pluck(:status).reverse %>
+<%array_status_result=array_status.each_with_object(Hash.new(0)){|word,counts| counts[word]+=1}%>
+<%last_seen_counter=0%>
+<%if array_status_result["Offline"] > 0
+    array_status.each do |value|
+        if value == "Online"
+        break
+        end
+        last_seen_counter+=1
+        if value == "Offline"
+            break
+        end
+    end
+end%>
+<%status_color=site.networkpages.last.status%>
+<%css_class=status_color == "Offline" ? "offline_color": "online_color"%><%#<!--ternary Statement-->%>
+<%css_box=status_color == "Offline" ? "network_block_full_offline": "network_block_full_online"%><%#<!--ternary Statement-->%>
+<%=tag.div data:{site_id:site.id}, class: "#{css_box} networkStatus network_block_full address_container siteElement serverBlock onlineColor flexcard_element" do%>
+<%unless site.maintenance? %>
+<%css_class="maintenance_color"%>
+<%css_box="network_block_full_maintenance"%>
+<%end%>
+      <div class="networkBlock">
+        <div class="networkTitle">
+        <%= link_to "#{site.address}", site ,class: 'link-to-text-color'%>
+        </div>
       </div>
-    </div>
-    <!--<span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
-      <span class="elementStatus"><%=site.networkpages.last.status %></span>-->
-  <%else%>
-    <span class ="elementName"><%= link_to "#{site.address}", site ,class: 'link-to-text-color'%></span>
-    <span class="elementStatus"><%="Maintenance" %></span>
-  <%end%>
+      <div class="networkBlock">
+        <div class="networkTitle <%=css_class%>">
+          <%unless site.maintenance? %>
+          <%=site.status %>
+          <%else%>
+          <%=site.networkpages.last.status %>
+          <%end%>
+        </div>
+      </div>
+      <div class="networkBlock <%=css_class%>">
+        <div class="networkTitle">
+          <%="#{last_seen_counter} Minutes Ago" %>
+        </div>
+      </div>
+
+      <div class="networkBlock <%=css_class%>">
+        <div class="networkTitle">
+          <%mean_response=site.networkpages.last(60).pluck(:relaytime).reverse%>
+          <%=(mean_response.sum(0.0)/mean_response.size).round(4)%>
+        </div>
+      </div>
+      <div class="networkBlock <%=css_class%>">
+        <div class="networkTitle">
+          <%=(array_status_result["Online"].to_f/(array_status_result["Online"].to_f+array_status_result["Offline"].to_f)*100).to_i%> %
+        </div>
+      </div>  
+  
 <%end%>
