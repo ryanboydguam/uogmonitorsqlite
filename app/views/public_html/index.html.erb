@@ -13,39 +13,55 @@
 
 
 <!--Network Status-->
-<div class="networkStatus">
+<div class="networkStatus network_block_full">
   <div class="networkBlock">
     <div class="networkTitle">
-      <span>Websites Status</span>
+      <span>SITE</span>
     </div>
     <div class="networkNumber">
-      <span><%=Time.now%></span>
+      <span><span>
     </div>
   </div>
   <div class="networkBlock">
     <div class="networkTitle">
-      <span>Websites Errors</span>
+      <span>Status</span>
     </div>
     <div class="networkNumber">
-      <span>0</span>
+      <span></span>
     </div>
   </div>
   <div class="networkBlock">
     <div class="networkTitle">
-      <span>Maintenance</span>
+      <span>Last Response</span>
     </div>
     <div class="networkNumber">
-      <span>0</span>
+      <span></span>
+    </div>
+  </div>
+  <div class="networkBlock">
+    <div class="networkTitle">
+      <span>Mean Response</span>
+    </div>
+    <div class="networkNumber">
+      <span></span>
+    </div>
+  </div>
+  <div class="networkBlock">
+    <div class="networkTitle">
+      <span>Uptime Last Hour</span>
+    </div>
+    <div class="networkNumber">
+      <span></span>
     </div>
   </div>
 </div>
 <!--END Network Status-->
 <div data-channel="sites">
   <div class="serverStatus">
-  <!--
+  
     <%@sites.offline.each do |site|%>
       <%=render partial: site%>
-    <%end%>-->
+    <%end%>
     <%@sites.online.each do |site|%>
       <%=render partial: site %>
     <%end%>
