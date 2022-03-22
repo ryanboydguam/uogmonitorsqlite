@@ -4,14 +4,14 @@
 <%if array_status_result["Offline"] > 0
     array_status.each do |value|
         if value == "Online"
-        break
+          break
         end
-        last_seen_counter+=1
         if value == "Offline"
-            break
+        last_seen_counter+=1
         end
     end
 end%>
+
 <%status_color=site.networkpages.last.status%>
 <%css_class=status_color == "Offline" ? "offline_color": "online_color"%><%#<!--ternary Statement-->%>
 <%css_box=status_color == "Offline" ? "network_block_full_offline": "network_block_full_online"%><%#<!--ternary Statement-->%>
@@ -42,8 +42,7 @@ end%>
 
       <div class="networkBlock <%=css_class%>">
         <div class="networkTitle">
-          <%mean_response=site.networkpages.last(60).pluck(:relaytime).reverse%>
-          <%=(mean_response.sum(0.0)/mean_response.size).round(4)%>
+          <%=site.mean%>
         </div>
       </div>
       <div class="networkBlock <%=css_class%>">
@@ -51,5 +50,4 @@ end%>
           <%=(array_status_result["Online"].to_f/(array_status_result["Online"].to_f+array_status_result["Offline"].to_f)*100).to_i%> %
         </div>
       </div>  
-  
 <%end%>
