@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_20_115959) do
+ActiveRecord::Schema.define(version: 2022_03_22_044217) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "colorselections", force: :cascade do |t|
+    t.string "red"
+    t.string "blue"
+    t.string "green"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "endpoint_types", force: :cascade do |t|
     t.string "name", null: false
@@ -20,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_115959) do
   create_table "monitor_locations", force: :cascade do |t|
     t.string "name", null: false
     t.string "address", null: false
-    t.integer "modified_by_id"
+    t.bigint "modified_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["modified_by_id"], name: "index_monitor_locations_on_modified_by_id"
@@ -35,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_115959) do
     t.datetime "creation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "site_id"
+    t.bigint "site_id"
     t.index ["site_id"], name: "index_networkpages_on_site_id"
   end
 
@@ -48,6 +59,10 @@ ActiveRecord::Schema.define(version: 2021_11_20_115959) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
+    t.bigint "user_id"
+    t.float "mean"
+    t.integer "houruptime"
+    t.index ["user_id"], name: "index_sites_on_user_id"
   end
 
   create_table "ssl_checks", force: :cascade do |t|

@@ -22,6 +22,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'redis', '~> 4.0'
 #for the discord bot
 gem 'discordrb', '~> 3.4'
+#sidekiq
+gem 'sidekiq', '~> 6.4'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

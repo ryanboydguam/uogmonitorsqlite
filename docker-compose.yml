@@ -8,6 +8,7 @@ services:
       - WEBPACKER_DEV_SERVER_HOST=webpacker
       - DATABASE_HOST=postgres
       - DATABASE_USER=postgres
+      - REDIS_URL=redis://redis:6379/0
     depends_on:
       - postgres
       - redis
@@ -36,24 +37,29 @@ services:
       - .:/app
       - bundler:/usr/local/bundle
       - node_modules:/app/node_modules
-  # sidekiq:
-  #   command: bundle exec sidekiq
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   image: my-server-monitor:devel
-  #   tmpfs: 
-  #     - /app/tmp/pids
-  #   volumes:
-  #     - .:/app
-  #     - bundler:/usr/local/bundle
-  #     - node_modules:/app/node_modules
+  sidekiq:
+    command: bundle exec sidekiq
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=postgres
+    image: my-server-monitor:devel
+    tmpfs: 
+      - /app/tmp/pids
+    volumes:
+      - .:/app
+      - bundler:/usr/local/bundle
+      - node_modules:/app/node_modules
   scheduler:
     command: sh -c "bundle exec whenever --update-crontab && crond -l0 -f -d0"
     environment:
       - RAILS_ENV=development
       - DATABASE_HOST=postgres
       - DATABASE_USER=postgres
+      - REDIS_URL=redis://redis:6379/0
     depends_on:
       - postgres
       - redis
