@@ -58,15 +58,14 @@
 <!--END Network Status-->
 <div data-channel="sites">
   <div class="serverStatus">
-  
+    <%@sites.maintenance.each do |site|%>
+      <%=render partial: site%>
+    <%end%>
     <%@sites.offline.each do |site|%>
       <%=render partial: site%>
     <%end%>
     <%@sites.online.each do |site|%>
       <%=render partial: site %>
-    <%end%>
-    <%@sites.maintenance.each do |site|%>
-      <%=render partial: site%>
     <%end%>
   </div>
 </div>
