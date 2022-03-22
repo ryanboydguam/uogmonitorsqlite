@@ -17,11 +17,9 @@
     <%= form.text_field :address %>
   </div>
 
-  <div class="field">
-    <%= form.label :user %>
-    <p>Name of person that is adding the site</p>
-    <%= form.text_field :user %>
-  </div>
+
+  <%= form.hidden_field :user_id %>
+
 
   <div class="field">
     <%= form.label :creation %>
