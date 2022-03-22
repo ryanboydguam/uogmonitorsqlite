@@ -17,6 +17,7 @@ class SitesController < ApplicationController
   # GET /sites/new
   def new
     @site = Site.new
+    @site.user=current_user
   end
 
   # GET /sites/1/edit
@@ -68,6 +69,6 @@ class SitesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def site_params
-      params.require(:site).permit(:address, :user, :creation, :delay, :maintenance)
+      params.require(:site).permit(:address, :user_id, :creation, :delay, :maintenance)
     end
 end
