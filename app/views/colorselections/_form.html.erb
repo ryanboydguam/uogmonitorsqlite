@@ -1,0 +1,32 @@
+<%= form_with(model: colorselection) do |form| %>
+  <% if colorselection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(colorselection.errors.count, "error") %> prohibited this colorselection from being saved:</h2>
+
+      <ul>
+        <% colorselection.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :red %>
+    <%= form.text_field :red %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blue %>
+    <%= form.text_field :blue %>
+  </div>
+
+  <div class="field">
+    <%= form.label :green %>
+    <%= form.text_field :green %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

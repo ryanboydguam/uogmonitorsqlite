@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Red:</strong>
+  <%= @colorselection.red %>
+</p>
+
+<p>
+  <strong>Blue:</strong>
+  <%= @colorselection.blue %>
+</p>
+
+<p>
+  <strong>Green:</strong>
+  <%= @colorselection.green %>
+</p>
+
+<%= link_to 'Edit', edit_colorselection_path(@colorselection) %> |
+<%= link_to 'Back', colorselections_path %>
