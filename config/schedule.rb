@@ -21,7 +21,8 @@ set :environment, ENV["RAILS_ENV"]
 
 # Learn more: http://github.com/javan/whenever
 every 1.minutes do
-  runner "AddressStatusCheckJob.perform_now()"
+  # runner "AddressStatusCheckJob.perform_later()"
+  rake "uog_monitor:ping_sites"
 end
 every 1.minutes do
    runner "DiscordBotJob.perform_now()"
