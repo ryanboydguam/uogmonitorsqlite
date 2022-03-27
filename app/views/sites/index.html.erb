@@ -18,7 +18,7 @@
     <% @sites.each do |site| %>
       <tr>
         <td><%= site.address %></td>
-        <td><%= site.user %></td>
+        <td><%= site.user.email %></td>
         <td><%= site.creation %></td>
         <td><%= site.delay %></td>
         <td><%= site.maintenance %></td>
