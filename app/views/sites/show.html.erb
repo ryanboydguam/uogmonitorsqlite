@@ -10,6 +10,7 @@
     <div class="showChildElement showElementLeft">Maintenance: </div>
     <div class="showChildElement showElementLeft">Mean: </div>
     <div class="showChildElement showElementLeft">Houruptime: </div>
+    <div class="showChildElement showElementLeft">lastseen: </div>
     <div class="showChildElement showElementLeft"><%= link_to 'Edit Site', edit_site_path(@site) %>:</div>
     <div class="showChildElement showElementLeft"><%= link_to 'Back To Sites', sites_path %>:</div>
   </div>
@@ -22,6 +23,7 @@
     <div class="showChildElement showElementRight"><%= @site.maintenance %></div>
     <div class="showChildElement showElementRight"><%= @site.mean %></div>
     <div class="showChildElement showElementRight"><%= @site.houruptime %></div>
+    <div class="showChildElement showElementRight"><%= @site.lastseen %></div>
     <div class="showChildElement showElementRight"></div>
     <div class="showChildElement showElementRight"></div>
   </div>
