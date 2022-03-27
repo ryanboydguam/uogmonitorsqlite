@@ -1,17 +1,3 @@
-<%array_status=site.networkpages.last(60).pluck(:status).reverse %>
-<%array_status_result=array_status.each_with_object(Hash.new(0)){|word,counts| counts[word]+=1}%>
-<%last_seen_counter=0%>
-<%if array_status_result["Offline"] > 0
-    array_status.each do |value|
-        if value == "Online"
-          break
-        end
-        if value == "Offline"
-        last_seen_counter+=1
-        end
-    end
-end%>
-
 <%status_color=site.networkpages.last.status%>
 <%css_class=status_color == "Offline" ? "offline_color": "online_color"%><%#<!--ternary Statement-->%>
 <%css_box=status_color == "Offline" ? "network_block_full_offline": "network_block_full_online"%><%#<!--ternary Statement-->%>
@@ -20,9 +6,15 @@ end%>
 <%css_class="maintenance_color"%>
 <%css_box="network_block_full_maintenance"%>
 <%end%>
+<%@colorselections = Colorselection.all%>
+<%r=@colorselections[site.id].red.to_s%>
+<%b=@colorselections[site.id].blue.to_s%>
+<%g=@colorselections[site.id].green.to_s%>
+<%retro_colors =""%>
+<%retro_colors = retro_colors+r+","+g+","+b%>
       <div class="networkBlock">
         <div class="networkTitle">
-        <%= link_to "#{site.address}", site ,class: 'link-to-text-color'%>
+        <%= link_to "#{site.address}", site ,class: 'link-to-text-color',style:"color:rgb(#{retro_colors})"%>
         </div>
       </div>
       <div class="networkBlock">
@@ -36,7 +28,7 @@ end%>
       </div>
       <div class="networkBlock <%=css_class%>">
         <div class="networkTitle">
-          <%="#{last_seen_counter} Minutes Ago" %>
+          <%="#{site.lastseen} Minutes Ago" %><!--change later-->
         </div>
       </div>
 
@@ -47,7 +39,7 @@ end%>
       </div>
       <div class="networkBlock <%=css_class%>">
         <div class="networkTitle">
-          <%=(array_status_result["Online"].to_f/(array_status_result["Online"].to_f+array_status_result["Offline"].to_f)*100).to_i%> %
+        <%=site.houruptime%>%
         </div>
       </div>  
 <%end%>
