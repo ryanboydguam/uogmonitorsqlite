@@ -4,15 +4,17 @@ class SitesController < ApplicationController
   # GET /sites or /sites.json
   def index
     @sites = Site.all
-    
+    @colorselections = Colorselection.all
   end
 
   # GET /sites/1 or /sites/1.json
   def show
     @networkpages = Networkpage.all
     @sites = Site.all
-   
+    @colorselections = Colorselection.all
+    
   end
+  
 
   # GET /sites/new
   def new
