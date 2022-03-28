@@ -18,13 +18,17 @@ class AddressStatusCheckJob < ApplicationJob
       tmpNetworkpage.relaytime = checkFloat
       tmpNetworkpage.creation = Time.now
       tmpNetworkpage.site = site
+      if site.networkpages.count == 0
+        site.mean=0
+        site.lastseen=0
+        site.houruptime=0
+      else  
       site.mean=(site.networkpages.order(id: :desc).limit(60).average(:relaytime)).round(4)
       sitestatus=site.networkpages.last(60).pluck(:status).reverse
       site.lastseen=sitestatus.find_index {|status| status=="Online"}
       sitestatus_hash=sitestatus.each_with_object(Hash.new(0)){|word,counts| counts[word]+=1}
-
       site.houruptime=(sitestatus_hash["Online"].to_f/60.to_f)*100
-
+      end
       tmpNetworkpage.save
 
       ActionCable.server.broadcast("sites:#{site.id}", { siteId: site.id, htmlRender: SitesController.render(
