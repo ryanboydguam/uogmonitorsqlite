@@ -28,7 +28,8 @@ consumer.subscriptions.create("SitesChannel", {
     console.log(data,data)
     //this.collection().querySelector(`[data-channel='${data.id}']`)
     window.location.reload();
-    //.outerHTML = data.server;
+    //document.getElementById("myChart").innerHTML.reload
+    //.outerHTML = data.server;networkPages-chart
     //Removes the old site data points
     var oldElement = document.querySelector(`[data-site-id='${data.siteId}']`)
     oldElement.remove(`data-site-id='${data.siteId}'`)

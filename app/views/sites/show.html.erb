@@ -28,13 +28,13 @@
     <div class="showChildElement showElementRight"></div>
   </div>
 </div>
-<div style="height: 150px; width:50%; overflow: auto">
+<div style="height: 50%; width:100%; overflow: auto">
   <table style="height: 400px;width:100%">
     <tr>
       <th style="position: sticky; top: 0; z-index: 1;">Delay</th>
       <th style="position: sticky; top: 0; z-index: 1;">Time</th>
     </tr>
-    <%data_holder = @site.networkpages.last(60).pluck(:relaytime,:creation).reverse()%>
+    <%data_holder = @site.networkpages.last(1440).pluck(:relaytime,:creation).reverse()%>
     <%data_holder.each do |data|%>
       <tr>
         <td><%=data[0]%></td>
