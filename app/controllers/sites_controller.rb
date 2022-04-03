@@ -9,10 +9,13 @@ class SitesController < ApplicationController
 
   # GET /sites/1 or /sites/1.json
   def show
-    @networkpages = Networkpage.all
-    @sites = Site.all
+    @networkpages = @site.networkpages.order(created_at: :desc)
+    if params[:start_date].present? && params[:end_date].present?
+      @networkpages= @networkpages.between(params[:start_date],params[:end_date])
+    else
+      @networkpages=@networkpages.limit(1440)
+    end
     @colorselections = Colorselection.all
-    
   end
   
 

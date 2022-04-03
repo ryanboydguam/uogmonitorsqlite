@@ -28,17 +28,28 @@
     <div class="showChildElement showElementRight"></div>
   </div>
 </div>
+<%= form_tag site_path(@site),method: :get do %>
+<%= label_tag :start_date %>
+<%= date_field_tag :start_date %>
+<%= label_tag :end_date %>
+<%= date_field_tag :end_date %>
+<%= submit_tag 'Submit' %>
+<%end%>
+
+
+
 <div style="height: 50%; width:100%; overflow: auto">
   <table style="height: 400px;width:100%">
     <tr>
       <th style="position: sticky; top: 0; z-index: 1;">Delay</th>
+      <th style="position: sticky; top: 0; z-index: 1;">Local Time</th>
       <th style="position: sticky; top: 0; z-index: 1;">Time</th>
     </tr>
-    <%data_holder = @site.networkpages.last(1440).pluck(:relaytime,:creation).reverse()%>
-    <%data_holder.each do |data|%>
+    <%data_holder = @networkpages.pluck(:relaytime,:creation).reverse()%>
+    <%@networkpages.each do |data|%>
       <tr>
-        <td><%=data[0]%></td>
-        <td><%=data[1]%></td>
+        <td><%=data.relaytime%></td>
+        <td><%=l(data.creation,locale: :en)%></td>
       </tr>
     <%end%>
   </table>
