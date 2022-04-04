@@ -34,8 +34,6 @@ class AddressStatusCheckJob < ApplicationJob
       ActionCable.server.broadcast("sites:#{site.id}", { siteId: site.id, htmlRender: SitesController.render(
         partial: 'sites/site', locals: { site: site }
       ), pingStatus: tmpNetworkpage.status })
-      p tmpNetworkpage
-      p '[UPDATE]'
     else
       tmpNetworkpage = site.networkpages.build # creates a new networkpage object
       tmpNetworkpage.status = false
@@ -54,8 +52,6 @@ class AddressStatusCheckJob < ApplicationJob
       ActionCable.server.broadcast("sites:#{site.id}", { siteId: site.id, htmlRender: SitesController.render(
         partial: 'sites/site', locals: { site: site }
       ), pingStatus: tmpNetworkpage.status })
-      p tmpNetworkpage
-      p '[UPDATE]'
     end
   end
   def upURL(host, time)
