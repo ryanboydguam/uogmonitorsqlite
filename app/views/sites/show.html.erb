@@ -81,7 +81,7 @@
     </tr>
     <%data_holder = @networkpages.pluck(:relaytime,:creation).reverse()%>
     <%@networkpages.each do |data|%>
-      <%if data.relaytime > 5%>
+      <%if data.relaytime >= 5%>
         <tr style="color:red;">
           <td><%=data.relaytime%></td>
           <td><%=l(data.creation,locale: :en)%></td>
