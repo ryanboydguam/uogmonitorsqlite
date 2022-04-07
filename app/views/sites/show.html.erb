@@ -1,56 +1,99 @@
 <p id="notice"><%= notice %></p>
-
-<div class="showContainer">
-  <div class="showBlockLeft">
-    <div class="showParentElement showElementLeft">Address: </div>
-    <div class="showChildElement showElementLeft">Status: </div>
-    <div class="showChildElement showElementLeft">User: </div>
-    <div class="showChildElement showElementLeft">Creation: </div>
-    <div class="showChildElement showElementLeft">Delay: </div>
-    <div class="showChildElement showElementLeft">Maintenance: </div>
-    <div class="showChildElement showElementLeft">Mean: </div>
-    <div class="showChildElement showElementLeft">Houruptime: </div>
-    <div class="showChildElement showElementLeft">lastseen: </div>
-    <div class="showChildElement showElementLeft"><%= link_to 'Edit Site', edit_site_path(@site) %>:</div>
-    <div class="showChildElement showElementLeft"><%= link_to 'Back To Sites', sites_path %>:</div>
-  </div>
-  <div class="showBlockRight">
-    <div class="showParentElementRight showElementRight"><%= @site.address %></div>
-    <div class="showChildElement showElementRight"><%= @site.status %></div>
-    <div class="showChildElement showElementRight"><%= @site.user.email %></div>
-    <div class="showChildElement showElementRight"><%= @site.creation %></div>
-    <div class="showChildElement showElementRight"><%= @site.delay %></div>
-    <div class="showChildElement showElementRight"><%= @site.maintenance %></div>
-    <div class="showChildElement showElementRight"><%= @site.mean %></div>
-    <div class="showChildElement showElementRight"><%= @site.houruptime %></div>
-    <div class="showChildElement showElementRight"><%= @site.lastseen %></div>
-    <div class="showChildElement showElementRight"></div>
-    <div class="showChildElement showElementRight"></div>
-  </div>
-</div>
+<%= link_to 'Edit Site', edit_site_path(@site),class:'button' %>
+<%= link_to 'Back To Sites', sites_path,class:'button'  %>
+<!--Site Information-->
+<table style="text-align:left; margin-top:5px;" class="table_css">
+  <tr>
+    <th>Site Information</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Address:  </th>
+    <td><%=@site.address %></td>
+  </tr>
+  <tr>
+    <th>Status:  </th>
+    <td><%=@site.status %></td>
+  </tr>
+  <tr>
+    <th>User:  </th>
+    <td><%=@site.user.email %></td>
+  </tr>
+  <tr>
+    <th>Creation: </th>
+    <td><%= @site.creation %></td>
+  </tr>
+  <tr>
+    <th>Delay: </th>
+    <td><%= @site.delay %></td>
+  </tr>
+  <tr>
+    <th>Maintenance: </th>
+    <td><%= @site.maintenance %></td>
+  </tr>
+  <tr>
+    <th>Mean: </th>
+    <td><%= @site.mean %></td>
+  </tr>
+  <tr>
+    <th>Houruptime: </th>
+    <td><%= @site.houruptime %></td>
+  </tr>
+  <tr>
+    <th>lastseen: </th>
+    <td><%= @site.lastseen %></td>
+  </tr>
+  
+</table>
+<!--Report Forum-->
 <%= form_tag site_path(@site),method: :get do %>
-<%= label_tag :start_date %>
-<%= date_field_tag :start_date %>
-<%= label_tag :end_date %>
-<%= date_field_tag :end_date %>
-<%= submit_tag 'Submit' %>
+<table style="text-align:left; margin-top:5px;" class="table_css">
+  <tr>
+    <th>Report</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= label_tag :start_date %></td>
+    <td><%= date_field_tag :start_date %></td>
+    <th>Records are pulled starting at 12:00 AM that day</th>
+  </tr>
+  <tr>
+    <td><%= label_tag :end_date %></td>
+    <td><%= date_field_tag :end_date %></td>
+    <th>Records are pulled ending at 11:59 PM that day</th>
+  </tr>
+  <tr>
+    <td><%= submit_tag 'Submit' %></td>
+  </tr>
+</table>
 <%end%>
 
 
 
+<p>Default is set to last 24 hours</p>
 <div style="height: 50%; width:100%; overflow: auto">
-  <table style="height: 400px;width:100%">
+  <table style="text-align:left; width:50%; margin-top:5px;">
     <tr>
-      <th style="position: sticky; top: 0; z-index: 1;">Delay</th>
-      <th style="position: sticky; top: 0; z-index: 1;">Local Time</th>
-      <th style="position: sticky; top: 0; z-index: 1;">Time</th>
+      <th >Delay</th>
+      <th >Local Time</th>
     </tr>
     <%data_holder = @networkpages.pluck(:relaytime,:creation).reverse()%>
     <%@networkpages.each do |data|%>
-      <tr>
-        <td><%=data.relaytime%></td>
-        <td><%=l(data.creation,locale: :en)%></td>
-      </tr>
+      <%if data.relaytime > 5%>
+        <tr style="color:red;">
+          <td><%=data.relaytime%></td>
+          <td><%=l(data.creation,locale: :en)%></td>
+        </tr>
+      <%else%>
+      <tr style="color:white;">
+          <td><%=data.relaytime%></td>
+          <td><%=l(data.creation,locale: :en)%></td>
+        </tr>
+      <%end%>
     <%end%>
   </table>
 </div>
+
+

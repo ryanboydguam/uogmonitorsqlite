@@ -1,5 +1,5 @@
 <%= form_with(model: site) do |form| %>
-  <% if site.errors.any? %>
+<% if site.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
 
@@ -10,37 +10,43 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :address %>
-    <p>Address or Ip address</p>
-    <%= form.text_field :address %>
-  </div>
-
-
-  <%= form.hidden_field :user_id %>
-
-
-  <div class="field">
-    <%= form.label :creation %>
-    <%= form.datetime_select :creation %>
-  </div>
-
-  <div class="field">
-    <%= form.label :delay %>
-    <p>Delay in seconds for wait response</p>
-    <p>Default is 5</p>
-    <%= form.number_field :delay %>
-  </div>
-
-  <div class="field">
-    <%= form.label :maintenance %>
-    <p>(0 Means not under maintenace)(1 Means under maintenace)</p>
-
-    <%= form.check_box :maintenance %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<table style="text-align:left; margin-top:5px;" class="table_css">
+  <tr>
+    <th>SITE EDITOR</th>
+    <th></th>
+    <th>Field Information</th>
+  </tr>
+  <tr>
+    <td><%= form.label :address %></td>
+    <td><%= form.text_field :address %></td>
+    <td>Address or ip-address</td>
+  </tr>
+  <tr>
+    <td><%= form.hidden_field :user_id %></td>
+    <td><%=current_user.email%></td>
+    <td>Auto Generated: Can not edit this.</td>
+  </tr>
+  <tr>
+    <td><%= form.label :creation %></td>
+    <td><%= form.datetime_select :creation %></td>
+    <td>You can input a custom creation date or leave the default value. </td>
+  </tr>
+  <tr>
+    <td><%= form.label :delay %></td>
+    <td><%= form.number_field :delay %></td>
+    <td>Default 5 seconds. How long the system should wait for a reply from the site before it considers it down. </td>
+  </tr>
+  <tr>
+    <td><%= form.label :maintenance %></td>
+    <td><%= form.check_box :maintenance %></td>
+    <td>
+    <p>Check the box to monitor the site. Uncheck the box for maintenance mode.</p>
+    </td>
+  </tr>
+  <tr>
+    <td><%= form.submit%></td>
+    <td></td>
+    <td>Submit the site information</td>
+  </tr>
+</table>
 <% end %>

@@ -117,4 +117,12 @@
     color:#445C85;
 }
 
-
+.site_container{
+  display: flex;
+}
+.site_child{
+  flex-grow: 1;
+}
+.table_css{
+  border: 1px solid #BFC0C0;
+}
