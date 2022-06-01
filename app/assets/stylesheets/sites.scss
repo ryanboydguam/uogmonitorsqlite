@@ -116,7 +116,15 @@
     border-bottom: 1px solid rgba(0,0,0,0.12);
     color:#445C85;
 }
-
+.websiteGraph{
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 4em;
+}
+.siteFrame {
+  display: flex;
+  flex-direction: column;
+}
 .site_container{
   display: flex;
 }

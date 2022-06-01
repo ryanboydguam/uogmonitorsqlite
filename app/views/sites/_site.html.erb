@@ -28,13 +28,16 @@
       </div>
       <div class="networkBlock <%=css_class%>">
         <div class="networkTitle">
-          <%="#{site.lastseen} Minutes Ago" %><!--change later-->
+          <%if site.lastseen < 4 %>
+          <%="#{site.lastseen*60} Seconds Ago" %>
+          <%else%>
+          <%="#{site.lastseen} Minutes Ago" %>
+          <%end%>
         </div>
       </div>
-
       <div class="networkBlock <%=css_class%>">
         <div class="networkTitle">
-          <%=site.mean%>
+          <%=site.mean%> Seconds
         </div>
       </div>
       <div class="networkBlock <%=css_class%>">

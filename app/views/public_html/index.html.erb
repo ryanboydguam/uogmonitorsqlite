@@ -2,70 +2,71 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
 
 <!-- END Navagation Section-->
-<h1>Website Uptime</h1>
-<!-- Render Graph Data -->
-<div class="websiteGraph">
-  <section class="networkIndexGraph">
-    <%=render partial: "site_graph" %>
-  </section>
-</div>
-<!-- END Render Graph Data -->
+<div class="siteFrame">
+  <!-- Render Graph Data -->
+  <div class="websiteGraph">
+    <section class="networkIndexGraph">
+      <%=render partial: "site_graph" %>
+    </section>
+  </div>
+  <!-- END Render Graph Data -->
 
 
-<!--Network Status-->
-<div class="networkStatus network_block_full">
-  <div class="networkBlock">
-    <div class="networkTitle">
-      <span>SITE</span>
+  <!--Network Status-->
+  <div class="networkStatus network_block_full">
+    <div class="networkBlock">
+      <div class="networkTitle">
+        <span>SITE</span>
+      </div>
+      <div class="networkNumber">
+        <span><span>
+      </div>
     </div>
-    <div class="networkNumber">
-      <span><span>
+    <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Status</span>
+      </div>
+      <div class="networkNumber">
+        <span></span>
+      </div>
+    </div>
+    <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Last Response</span>
+      </div>
+      <div class="networkNumber">
+        <span></span>
+      </div>
+    </div>
+    <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Mean Response</span>
+      </div>
+      <div class="networkNumber">
+        <span></span>
+      </div>
+    </div>
+    <div class="networkBlock">
+      <div class="networkTitle">
+        <span>Uptime Last Hour</span>
+      </div>
+      <div class="networkNumber">
+        <span></span>
+      </div>
     </div>
   </div>
-  <div class="networkBlock">
-    <div class="networkTitle">
-      <span>Status</span>
+  <!--END Network Status-->
+  <div data-channel="sites">
+    <div class="serverStatus">
+      <%@sites.order(houruptime: :asc).maintenance.each do |site|%>
+        <%=render partial: site%>
+      <%end%>
+      <%@sites.order(houruptime: :asc).offline.each do |site|%>
+        <%=render partial: site%>
+      <%end%>
+      <%@sites.order(houruptime: :asc).online.each do |site|%>
+        <%=render partial: site %>
+      <%end%>
     </div>
-    <div class="networkNumber">
-      <span></span>
-    </div>
-  </div>
-  <div class="networkBlock">
-    <div class="networkTitle">
-      <span>Last Response</span>
-    </div>
-    <div class="networkNumber">
-      <span></span>
-    </div>
-  </div>
-  <div class="networkBlock">
-    <div class="networkTitle">
-      <span>Mean Response</span>
-    </div>
-    <div class="networkNumber">
-      <span></span>
-    </div>
-  </div>
-  <div class="networkBlock">
-    <div class="networkTitle">
-      <span>Uptime Last Hour</span>
-    </div>
-    <div class="networkNumber">
-      <span></span>
-    </div>
-  </div>
-</div>
-<!--END Network Status-->
-<div data-channel="sites">
-  <div class="serverStatus">
-    <%@sites.order(houruptime: :asc).maintenance.each do |site|%>
-      <%=render partial: site%>
-    <%end%>
-    <%@sites.order(houruptime: :asc).offline.each do |site|%>
-      <%=render partial: site%>
-    <%end%>
-    <%@sites.order(houruptime: :asc).online.each do |site|%>
-      <%=render partial: site %>
-    <%end%>
   </div>
 </div>

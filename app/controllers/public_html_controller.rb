@@ -34,6 +34,9 @@ class PublicHtmlController < ApplicationController
         datasets: datasets
       },
       options: {
+        legend: {
+          display: false
+        },
         scales: {
           y: {
             ticks: {

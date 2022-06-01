@@ -1,99 +1,134 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'Edit Site', edit_site_path(@site),class:'button' %>
 <%= link_to 'Back To Sites', sites_path,class:'button'  %>
-<!--Site Information-->
-<table style="text-align:left; margin-top:5px;" class="table_css">
-  <tr>
-    <th>Site Information</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <th>Address:  </th>
-    <td><%=@site.address %></td>
-  </tr>
-  <tr>
-    <th>Status:  </th>
-    <td><%=@site.status %></td>
-  </tr>
-  <tr>
-    <th>User:  </th>
-    <td><%=@site.user.email %></td>
-  </tr>
-  <tr>
-    <th>Creation: </th>
-    <td><%= @site.creation %></td>
-  </tr>
-  <tr>
-    <th>Delay: </th>
-    <td><%= @site.delay %></td>
-  </tr>
-  <tr>
-    <th>Maintenance: </th>
-    <td><%= @site.maintenance %></td>
-  </tr>
-  <tr>
-    <th>Mean: </th>
-    <td><%= @site.mean %></td>
-  </tr>
-  <tr>
-    <th>Houruptime: </th>
-    <td><%= @site.houruptime %></td>
-  </tr>
-  <tr>
-    <th>lastseen: </th>
-    <td><%= @site.lastseen %></td>
-  </tr>
+<%= link_to 'Edit Site', edit_site_path(@site),class:'button' %>
+<div class="site_container">
+  <div class="site_container_child_left">
+      <!--Site Information-->
+      <table class="centerShow" >
+        <tr>
+          <th>Site Information</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <th>Address:  </th>
+          <td><%=@site.address %></td>
+        </tr>
+        <tr>
+          <th>Status:  </th>
+          <td><%=@site.status %></td>
+        </tr>
+        <tr>
+          <th>User:  </th>
+          <td><%=@site.user.email %></td>
+        </tr>
+        <tr>
+          <th>Creation: </th>
+          <td><%= @site.creation %></td>
+        </tr>
+        <tr>
+          <th>Delay: </th>
+          <td><%= @site.delay %></td>
+        </tr>
+        <tr>
+          <th>Maintenance: </th>
+          <td><%= @site.maintenance %></td>
+        </tr>
+        <tr>
+          <th>Mean: </th>
+          <td><%= @site.mean %></td>
+        </tr>
+        <tr>
+          <th>Houruptime: </th>
+          <td><%= @site.houruptime %></td>
+        </tr>
+        <tr>
+          <th>lastseen: </th>
+          <td><%= @site.lastseen %></td>
+        </tr>
+    </table>
+    <!--Site Information-->
+  </div>
+  <div class="site_container_child_right">
+      <table id="line-example-5" class="charts-css line multiple hide-data"><caption> Line Example #5 </caption> <tbody><tr><td style="--start: 0.1; --size: 0.3;"><span class="data"> 30 </span></td> <td style="--start: 0.6; --size: 0.4;"><span class="data"> 40 </span></td> <td style="--start: 0.8; --size: 0.7;"><span class="data"> 70 </span></td> <td style="--start: 0.7; --size: 0.9;"><span class="data"> 100 </span></td></tr> <tr><td style="--start: 0.3; --size: 0.1;"><span class="data"> 10 </span></td> <td style="--start: 0.4; --size: 0.6;"><span class="data"> 60 </span></td> <td style="--start: 0.7; --size: 0.9;"><span class="data"> 90 </span></td> <td style="--start: 0.9; --size: 0.7;"><span class="data"> 70 </span></td></tr> <tr><td style="--start: 0.1; --size: 0.3;"><span class="data"> 30 </span></td> <td style="--start: 0.6; --size: 0.4;"><span class="data"> 40 </span></td> <td style="--start: 0.9; --size: 0.8;"><span class="data"> 80 </span></td> <td style="--start: 0.7; --size: 0.9;"><span class="data"> 90 </span></td></tr> <tr><td style="--start: 0.3; --size: 0.1;"><span class="data"> 10 </span></td> <td style="--start: 0.4; --size: 0.6;"><span class="data"> 60 </span></td> <td style="--start: 0.8; --size: 0.8;"><span class="data"> 80 </span></td> <td style="--start: 0.9; --size: 0.9;"><span class="data"> 90 </span></td></tr> <tr><td style="--start: 0.1; --size: 0.3;"><span class="data"> 30 </span></td> <td style="--start: 0.6; --size: 0.4;"><span class="data"> 40 </span></td> <td style="--start: 0.8; --size: 1.0;"><span class="data"> 100 </span></td> <td style="--start: 0.9; --size: 0.7;"><span class="data"> 70 </span></td></tr></tbody></table>
+      <!--Report Forum-->
+    <%= form_tag site_path(@site),method: :get do %>
+    <table class="centerShow" style="height:100%;">
+      <tr>
+        <th>Report</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td><%= label_tag :start_date %></td>
+        <td><%= date_field_tag :start_date %></td>
+        <th>Records are pulled starting at 12:00 AM that day</th>
+      </tr>
+      <tr>
+        <td><%= label_tag :end_date %></td>
+        <td><%= date_field_tag :end_date %></td>
+        <th>Records are pulled ending at 11:59 PM that day</th>
+      </tr>
+      <tr>
+        <td><%= submit_tag 'Submit' %></td>
+      </tr>
+    </table>
+    <%end%>
+    <!--Report Forum-->
+    .
+  </div>
   
-</table>
-<!--Report Forum-->
-<%= form_tag site_path(@site),method: :get do %>
-<table style="text-align:left; margin-top:5px;" class="table_css">
-  <tr>
-    <th>Report</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <td><%= label_tag :start_date %></td>
-    <td><%= date_field_tag :start_date %></td>
-    <th>Records are pulled starting at 12:00 AM that day</th>
-  </tr>
-  <tr>
-    <td><%= label_tag :end_date %></td>
-    <td><%= date_field_tag :end_date %></td>
-    <th>Records are pulled ending at 11:59 PM that day</th>
-  </tr>
-  <tr>
-    <td><%= submit_tag 'Submit' %></td>
-  </tr>
-</table>
-<%end%>
+</div>
+<div class="site_container">
+  <div class="site_container_child_left">
+  .
+  </div>
+  <div class="site_container_child_right">
+      
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<table class="centerShow">
+      <tr>
+        <th >Delay</th>
+        <th >Local Time</th>
+      </tr>
+      <%data_holder = @networkpages.pluck(:relaytime,:creation).reverse()%>
+      <%@networkpages.each do |data|%>
+        <%if data.relaytime >= 5%>
+          <tr style="color:red;">
+            <td>OFFLINE</td>
+            <td><%=l(data.creation,locale: :en)%></td>
+          </tr>
+        <%else%>
+        <tr style="color:white;">
+            <td><%=data.relaytime%></td>
+            <td><%=l(data.creation,locale: :en)%></td>
+          </tr>
+        <%end%>
+      <%end%>
+    </table>
+
+
+<div class="site_box">
+ 
+</div>
+
 
 
 
 <p>Default is set to last 24 hours</p>
-<div style="height: 50%; width:100%; overflow: auto">
-  <table style="text-align:left; width:50%; margin-top:5px;">
-    <tr>
-      <th >Delay</th>
-      <th >Local Time</th>
-    </tr>
-    <%data_holder = @networkpages.pluck(:relaytime,:creation).reverse()%>
-    <%@networkpages.each do |data|%>
-      <%if data.relaytime >= 5%>
-        <tr style="color:red;">
-          <td><%=data.relaytime%></td>
-          <td><%=l(data.creation,locale: :en)%></td>
-        </tr>
-      <%else%>
-      <tr style="color:white;">
-          <td><%=data.relaytime%></td>
-          <td><%=l(data.creation,locale: :en)%></td>
-        </tr>
-      <%end%>
-    <%end%>
-  </table>
-</div>
+
+
 
 

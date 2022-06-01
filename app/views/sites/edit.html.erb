@@ -1,6 +1,4 @@
-<h1>Editing Site</h1>
-
+<%= link_to 'Back', sites_path,class:'button'  %>
+<%= link_to 'Show', @site,class:'button'  %> 
 <%= render 'form', site: @site %>
 
-<%= link_to 'Show', @site,class:'button'  %> 
-<%= link_to 'Back', sites_path,class:'button'  %>
